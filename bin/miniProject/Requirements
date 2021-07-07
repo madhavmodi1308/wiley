@@ -1,0 +1,7 @@
+1) An Account class containing major details like (Account number, Holder's name, Address, Balance)
+2) A banking class containing transactional methods like (credit, debit, mini statement, logout);
+3) A user section to view the account details and transactions
+4) Store the specific user credentials i.e( Account number/ UserId/ Password) and use the same while logging in the account
+5) Put some password/UserId checks and assign max. no. of attempts.
+6) Update the balance on every successful transaction and prompt when fail to do so.
+7) A porper logout window so that current user may logout and new user can login.
