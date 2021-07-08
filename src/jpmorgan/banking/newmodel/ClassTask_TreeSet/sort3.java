@@ -5,7 +5,6 @@ import java.util.Comparator;
 public class sort3 implements Comparator<Type>{
 	@Override
 	public int compare(Type cur, Type next) {
-		// TODO Auto-generated method stub
 		if(cur.object == null || next.object == null){
 			return -1;
 		}
@@ -24,7 +23,6 @@ public class sort3 implements Comparator<Type>{
 		}
 		else if(cur.object instanceof User) {
 			if(next.object instanceof User) {
-				//    			return ((User) cur.object).getId()- (User) next.object).getId();
 				return ((User) cur.object).getName().compareTo(((User) next.object).getName());
 			}
 			else if(next.object instanceof String){
@@ -40,12 +38,8 @@ public class sort3 implements Comparator<Type>{
 				int j = (int)cur.object;
 				return j - i;
 			}
-			else if(next.object instanceof String){
+			else 
 				return 1;
-			}
-			else if(next.object instanceof User) {
-				return 1;
-			}
 		}
 		return 0;
 	}
