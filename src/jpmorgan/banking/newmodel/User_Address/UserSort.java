@@ -3,8 +3,10 @@ package jpmorgan.banking.newmodel.User_Address;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.TreeSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class UserSort {
 
@@ -12,20 +14,20 @@ public class UserSort {
 
 		List<User> users = new ArrayList<User>();
 
-		List<Address> ad = Arrays.asList(new Address("DEL", "110086"), new Address("BLR", "100072"));
+		List<Address> ad = Arrays.asList(new Address("DEL", "110001"), new Address("BLR", "560002"),new Address("BLR", "560001"));
 		users.add(new User(1, "Madhav", ad));
-		ad = Arrays.asList(new Address("HYD", "123086"), new Address("BLR", "100072"));
+		ad = Arrays.asList(new Address("BLR", "560038"), new Address("DEL", "110096"), new Address("DEL", "110001"));
 		users.add(new User(2, "Akshay", ad));
-		ad = Arrays.asList(new Address("HYD", "123086"), new Address("BLR", "100072"));
+		ad = Arrays.asList(new Address("BOM", "400018"),new Address("BOM", "400037"),new Address("DEL", "110001"), new Address("BLR", "560001"));
 		users.add(new User(3, "Rohit", ad));
 
-		HashMap<Address, List<User>> hm = new HashMap<>();
+		HashMap<Address, Set<User>> hm = new HashMap<>();
 
 		for (User u : users) {
 			//			System.out.println(u.addresses);
 			for (Address adr : u.addresses) {
 				if (!hm.containsKey(adr)) {
-					ArrayList<User> ar = new ArrayList<>();
+					Set<User> ar = new TreeSet<>();
 					ar.add(u);
 					hm.put(adr, ar);
 				} else {
@@ -34,17 +36,17 @@ public class UserSort {
 			}
 		}
 
-		for (Map.Entry<Address, List<User>> e : hm.entrySet()) {
-			if (e.getValue().size() >= 2) {
+		for (Map.Entry<Address, Set<User>> e : hm.entrySet()) {
+//			if (e.getValue().size() >= 2) {
 				System.out.println(e.getKey() + " " + e.getValue());
-			}
+//			}
 		}
 
 	}
 
 }
 
-class User {
+class User implements Comparable<User>{
 	int id;
 	String name;
 	List<Address> addresses;
@@ -60,9 +62,15 @@ class User {
 		// TODO Auto-generated method stub
 		return "{" + this.id + " " + this.name + "}";
 	}
+
+	@Override
+	public int compareTo(User o) {
+		// TODO Auto-generated method stub
+		return this.id-o.id;
+	}
 }
 
-class Address {
+class Address{
 	String city, zip;
 
 	Address(String city, String zip) {
@@ -78,13 +86,13 @@ class Address {
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
-		return city.hashCode();
+		return zip.hashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
-		return this.city.equals(((Address) obj).city);
+		return this.zip.equals(((Address) obj).zip);
 	}
+
 }
