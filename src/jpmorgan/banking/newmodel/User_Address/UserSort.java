@@ -35,15 +35,43 @@ public class UserSort {
 				}
 			}
 		}
-
+		
 		for (Map.Entry<Address, Set<User>> e : hm.entrySet()) {
 //			if (e.getValue().size() >= 2) {
 				System.out.println(e.getKey() + " " + e.getValue());
 //			}
 		}
+		System.out.println("-------------------");
+		Set<record> list = new TreeSet<record>();
+		
+		for (Map.Entry<Address, Set<User>> e : hm.entrySet()) {
+				list.add(new record(e.getKey(),e.getValue()));
+		}
+		
+		list.stream().forEach(i -> System.out.println(i));
 
 	}
 
+}
+
+class record implements Comparable<record>{
+	Address address;
+	Set<User> users;
+	
+	record(Address ad, Set<User> u){
+		this.address = ad;
+		this.users = u;
+	}
+	@Override
+	public int compareTo(record o) {
+		// TODO Auto-generated method stub
+		return o.users.size()-this.users.size();
+	}
+	@Override
+	public String toString() {
+		return this.address+" "+this.users;
+	}
+	
 }
 
 class User implements Comparable<User>{
